@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#05060a" />
-  <meta name="description" content="Midnight Council is a sleek social deduction game of hidden roles, night votes, and daylight reckonings. Download on iOS and Android." />
+  <meta name="description" content="Midnight Council: social deduction for your next party. Hidden roles, secret objectives, and game-breaking powers. iOS and Android." />
   <title>Midnight Council</title>
+  <link rel="preconnect" href="https://tools.applemediaservices.com" />
+  <link rel="preconnect" href="https://play.google.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -222,10 +224,10 @@
     .hero-title {
       font-family: "Instrument Serif", ui-serif, Georgia, serif;
       font-weight: 400;
-      font-size: clamp(2.15rem, 6.5vw, 3.85rem);
-      line-height: 1.05;
+      font-size: clamp(1.95rem, 6vw, 3.35rem);
+      line-height: 1.08;
       letter-spacing: -0.02em;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       text-wrap: balance;
     }
 
@@ -242,49 +244,67 @@
       font-size: clamp(1rem, 3.6vw, 1.08rem);
       line-height: 1.65;
       max-width: 52ch;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
+    }
+
+    .hero-hook {
+      list-style: none;
+      margin: 0 0 22px 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 42rem;
+    }
+
+    .hero-hook li {
+      font-size: clamp(0.94rem, 3.1vw, 1.02rem);
+      color: var(--muted);
+      line-height: 1.52;
+    }
+
+    .hero-hook strong {
+      color: var(--ink);
+      font-weight: 650;
     }
 
     .cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 16px;
+      gap: 14px 20px;
       align-items: center;
       justify-content: flex-start;
-      margin-bottom: 18px;
+      margin-bottom: 0;
     }
 
+    /* Apple and Google badge specs: use official artwork only, preserve aspect ratio, typical row height ~40pt Apple / proportional Play */
     .store-badge {
       display: inline-flex;
       line-height: 0;
       flex: 0 0 auto;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.18s ease, opacity 0.18s ease;
+      transition: opacity 0.18s ease, transform 0.18s ease;
       -webkit-tap-highlight-color: transparent;
     }
 
     .store-badge:hover {
-      opacity: 0.92;
+      opacity: 0.9;
       transform: translateY(-1px);
     }
 
     .store-badge:focus-visible {
       outline: 2px solid rgba(60, 240, 255, 0.65);
       outline-offset: 3px;
+      border-radius: 4px;
     }
 
     .store-badge img {
       display: block;
       width: auto;
-      height: 52px;
+      height: 40px;
     }
 
-    .fineprint {
-      color: rgba(232, 236, 255, 0.45);
-      font-size: 0.86rem;
-      line-height: 1.55;
-      max-width: 62ch;
+    .store-badge--google img {
+      height: 58px;
     }
 
     .hero-card {
@@ -314,6 +334,19 @@
       display: grid;
       grid-template-rows: auto 1fr auto;
       gap: 14px;
+    }
+
+    .hero-mood {
+      text-align: center;
+      margin: 0;
+      padding: 6px 8px 2px;
+      font-size: clamp(0.72rem, 2.4vw, 0.82rem);
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(232, 236, 255, 0.5);
+      border: none;
+      background: none;
     }
 
     .pill-row {
@@ -828,17 +861,18 @@
       }
 
       .cta-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px 18px;
       }
 
       .store-badge img {
-        height: auto;
-        width: min(248px, 78vw);
-        max-height: 54px;
-        object-fit: contain;
-        object-position: center;
+        height: 40px;
+      }
+
+      .store-badge--google img {
+        height: 56px;
       }
 
       section {
@@ -891,30 +925,40 @@
     <main id="download">
       <div class="hero">
         <div>
-          <div class="kicker"><span class="dot" aria-hidden="true"></span> A room code. A secret role. A council that never sleeps.</div>
-          <h2 class="hero-title">Spice up your next party with mystery and midnight thrills. <em>No safe seats.</em></h2>
+          <h2 class="hero-title">Spice up the party. <em>No safe seats.</em></h2>
           <p class="lede">
-            The group-game upgrade for five or more: one room code, hidden roles, nights that scheme and days that vote someone off the story.
-            Everyone also draws a private objective. Clear it and you earn a power that can swing the next round. The twist below goes deeper. Same friends, louder memories.
+            Social deduction, elevated. Midnight Council turns your next gathering into a high-stakes thriller of hidden roles, secret agendas, and earned betrayals.
           </p>
+          <ul class="hero-hook" aria-label="At a glance">
+            <li><strong>5+ Players</strong> · One room code.</li>
+            <li><strong>Hidden Objectives</strong> · Complete your private mission to unlock game-breaking powers.</li>
+            <li><strong>The Stage</strong> · Built for real-life friend groups and ruthless group chats.</li>
+          </ul>
           <div class="cta-row" role="group" aria-label="Download Midnight Council">
-            <a class="store-badge" href="https://apps.apple.com/kz/app/midnight-council/id6761691999" target="_blank" rel="noopener noreferrer">
-              <img src="appstore.png" width="840" height="859" alt="Download on the App Store" decoding="async" />
+            <a class="store-badge store-badge--apple" href="https://apps.apple.com/kz/app/midnight-council/id6761691999" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83"
+                width="120"
+                height="40"
+                alt="Download on the App Store"
+                decoding="async"
+              />
             </a>
-            <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.antigravity.midnightcouncil" target="_blank" rel="noopener noreferrer">
-              <img src="playstore.png" width="800" height="800" alt="Get it on Google Play" decoding="async" />
+            <a class="store-badge store-badge--google" href="https://play.google.com/store/apps/details?id=com.antigravity.midnightcouncil" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                width="646"
+                height="250"
+                alt="Get it on Google Play"
+                decoding="async"
+              />
             </a>
           </div>
-          <p class="fineprint">Built for real-life friend groups and ruthless group chats. If you love hidden roles, tense votes, and dramatic reveals, this is your table.</p>
         </div>
 
         <aside class="hero-card" aria-label="Product preview">
           <div class="hero-card-inner">
-            <div class="pill-row">
-              <span class="pill">Night phase</span>
-              <span class="pill accent">Daybreak</span>
-              <span class="pill">Room codes</span>
-            </div>
+            <p class="hero-mood">THRILL DECEIT CHAOS</p>
             <div class="stage" aria-hidden="true">
               <div class="grid-floor"></div>
               <div class="holo">
