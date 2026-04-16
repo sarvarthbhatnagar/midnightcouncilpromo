@@ -247,27 +247,6 @@
       margin-bottom: 18px;
     }
 
-    .hero-hook {
-      list-style: none;
-      margin: 0 0 22px 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 42rem;
-    }
-
-    .hero-hook li {
-      font-size: clamp(0.94rem, 3.1vw, 1.02rem);
-      color: var(--muted);
-      line-height: 1.52;
-    }
-
-    .hero-hook strong {
-      color: var(--ink);
-      font-weight: 650;
-    }
-
     .cta-row {
       display: flex;
       flex-wrap: wrap;
@@ -314,7 +293,7 @@
       box-shadow: var(--shadow);
       overflow: hidden;
       position: relative;
-      min-height: 380px;
+      min-height: 420px;
     }
 
     .hero-card::before {
@@ -441,17 +420,36 @@
 
     .hero-foot {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: clamp(0.82rem, 2.8vw, 0.9rem);
+      line-height: 1.45;
     }
 
-    .hero-foot b {
+    .hero-stats {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hero-stats li {
+      color: var(--muted);
+    }
+
+    .hero-stats strong {
       color: var(--ink);
       font-weight: 650;
+    }
+
+    .hero-platforms {
+      font-size: 0.8rem;
+      opacity: 0.82;
+      padding-top: 2px;
     }
 
     section {
@@ -563,33 +561,94 @@
       font-weight: 650;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
+    .carousel-shell {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+      margin: 0 -6px;
+    }
+
+    .roles-carousel {
+      flex: 1;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 8px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+    }
+
+    .roles-carousel::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    .roles-carousel::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+    }
+
+    .roles-carousel-track {
+      display: flex;
       gap: 14px;
+      padding: 4px 8px 14px;
+    }
+
+    .carousel-btn {
+      flex: 0 0 auto;
+      align-self: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--ink);
+      font-size: 1.35rem;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.24);
+    }
+
+    .carousel-btn:focus-visible {
+      outline: 2px solid rgba(60, 240, 255, 0.65);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 700px) {
+      .carousel-btn {
+        display: none;
+      }
+
+      .carousel-shell {
+        margin: 0;
+      }
     }
 
     .card {
-      grid-column: span 3;
+      flex: 0 0 clamp(260px, 72vw, 300px);
+      scroll-snap-align: start;
       border-radius: var(--radius);
       border: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
       overflow: hidden;
       position: relative;
       min-height: 360px;
+      max-width: 300px;
       display: flex;
       flex-direction: column;
     }
 
-    @media (max-width: 1100px) {
+    @media (min-width: 900px) {
       .card {
-        grid-column: span 6;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .card {
-        grid-column: span 12;
+        flex-basis: 280px;
       }
     }
 
@@ -929,11 +988,6 @@
           <p class="lede">
             Social deduction, elevated. Midnight Council turns your next gathering into a high-stakes thriller of hidden roles, secret agendas, and earned betrayals.
           </p>
-          <ul class="hero-hook" aria-label="At a glance">
-            <li><strong>5+ Players</strong> · One room code.</li>
-            <li><strong>Hidden Objectives</strong> · Complete your private mission to unlock game-breaking powers.</li>
-            <li><strong>The Stage</strong> · Built for real-life friend groups and ruthless group chats.</li>
-          </ul>
           <div class="cta-row" role="group" aria-label="Download Midnight Council">
             <a class="store-badge store-badge--apple" href="https://apps.apple.com/kz/app/midnight-council/id6761691999" target="_blank" rel="noopener noreferrer">
               <img
@@ -968,8 +1022,12 @@
               </div>
             </div>
             <div class="hero-foot">
-              <div><b>5+ players</b> · private rooms · fast sessions</div>
-              <div style="opacity:0.85">iOS · Android</div>
+              <ul class="hero-stats">
+                <li><strong>5+ Players</strong> · One room code.</li>
+                <li><strong>Hidden Objectives</strong> · Complete your private mission to unlock game-breaking powers.</li>
+                <li><strong>The Stage</strong> · Built for real-life friend groups and ruthless group discussions.</li>
+              </ul>
+              <div class="hero-platforms">iOS · Android</div>
             </div>
           </div>
         </aside>
@@ -980,7 +1038,10 @@
           <h3 id="roles-heading">Four identities. One table.</h3>
         </div>
 
-        <div class="cards">
+        <div class="carousel-shell">
+          <button type="button" class="carousel-btn carousel-btn--prev" aria-label="Previous role">‹</button>
+          <div class="roles-carousel" id="roles-carousel" role="region" aria-roledescription="carousel" aria-label="Roles" tabindex="0">
+            <div class="roles-carousel-track">
           <article class="card mob">
             <div class="card-top">
               <div class="role-tag">Faction</div>
@@ -1036,6 +1097,9 @@
               <p>No flashy powers, no easy tells. You win by persuasion: the day vote is your weapon, and the council is your stage.</p>
             </div>
           </article>
+            </div>
+          </div>
+          <button type="button" class="carousel-btn carousel-btn--next" aria-label="Next role">›</button>
         </div>
 
         <div id="secret-objectives" class="spice-panel" aria-labelledby="objectives-heading">
@@ -1110,7 +1174,36 @@
   </div>
 
   <script>
-    document.getElementById("y").textContent = String(new Date().getFullYear());
+    (function () {
+      var y = document.getElementById("y");
+      if (y) y.textContent = String(new Date().getFullYear());
+
+      var el = document.getElementById("roles-carousel");
+      if (!el) return;
+
+      function step(dir) {
+        var card = el.querySelector(".card");
+        var gap = 14;
+        var w = card ? card.getBoundingClientRect().width + gap : el.clientWidth * 0.72;
+        el.scrollBy({ left: dir * w, behavior: "smooth" });
+      }
+
+      var prev = document.querySelector(".carousel-btn--prev");
+      var next = document.querySelector(".carousel-btn--next");
+      if (prev) prev.addEventListener("click", function () { step(-1); });
+      if (next) next.addEventListener("click", function () { step(1); });
+
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          step(-1);
+        }
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          step(1);
+        }
+      });
+    })();
   </script>
 </body>
 </html>
