@@ -6,6 +6,28 @@
   <meta name="theme-color" content="#05060a" />
   <meta name="description" content="Midnight Council: social deduction for your next party. Hidden roles, secret objectives, and game-breaking powers. iOS and Android." />
   <title>Midnight Council</title>
+  <script>
+    (function () {
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      function toTopIfNoHash() {
+        var h = window.location.hash;
+        if (h && h !== "#") return;
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      }
+      toTopIfNoHash();
+      document.addEventListener("DOMContentLoaded", toTopIfNoHash);
+      window.addEventListener("load", function () {
+        toTopIfNoHash();
+        requestAnimationFrame(function () {
+          requestAnimationFrame(toTopIfNoHash);
+        });
+      });
+    })();
+  </script>
   <link rel="preconnect" href="https://tools.applemediaservices.com" />
   <link rel="preconnect" href="https://play.google.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -231,7 +253,6 @@
       margin-bottom: 0;
     }
 
-    /* Apple and Google badge specs: use official artwork only, preserve aspect ratio, typical row height ~40pt Apple / proportional Play */
     .store-badge {
       display: inline-flex;
       line-height: 0;
@@ -308,8 +329,8 @@
       padding: 6px 8px 2px;
       font-size: clamp(0.72rem, 2.4vw, 0.82rem);
       font-weight: 700;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      text-transform: none;
       color: rgba(232, 236, 255, 0.5);
       border: none;
       background: none;
@@ -989,7 +1010,7 @@
 
         <aside class="hero-card" aria-label="Product preview">
           <div class="hero-card-inner">
-            <p class="hero-mood">THRILL DECEIT CHAOS</p>
+            <p class="hero-mood">deduce . deceive . survive</p>
             <div class="stage" aria-hidden="true">
               <div class="grid-floor"></div>
               <div class="holo">
@@ -1152,17 +1173,6 @@
 
   <script>
     (function () {
-      if ("scrollRestoration" in history) {
-        history.scrollRestoration = "manual";
-      }
-      function toTopIfNoHash() {
-        if (!window.location.hash) {
-          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-        }
-      }
-      toTopIfNoHash();
-      requestAnimationFrame(toTopIfNoHash);
-
       var y = document.getElementById("y");
       if (y) y.textContent = String(new Date().getFullYear());
 
