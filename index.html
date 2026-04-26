@@ -129,9 +129,241 @@
     header {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: space-between;
       padding: 12px 0 6px;
-      gap: 14px;
+      gap: 12px 16px;
+      flex-wrap: wrap;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-left: auto;
+      min-width: 0;
+    }
+
+    .buzz-qr-trigger {
+      position: relative;
+      display: inline-flex;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      flex: 0 0 auto;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .buzz-qr-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .buzz-qr-ring::before {
+      content: "";
+      position: absolute;
+      inset: -100%;
+      background: conic-gradient(
+        from 0deg,
+        var(--cyan),
+        var(--violet),
+        var(--rose),
+        var(--amber),
+        var(--mint),
+        var(--cyan)
+      );
+      animation: spin 2.8s linear infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .buzz-qr-ring::before {
+        animation: none;
+        opacity: 0.65;
+        inset: 0;
+        background: conic-gradient(
+          from 140deg,
+          rgba(60, 240, 255, 0.5),
+          rgba(139, 92, 255, 0.45),
+          rgba(255, 77, 125, 0.4),
+          rgba(60, 240, 255, 0.5)
+        );
+      }
+    }
+
+    .buzz-qr-trigger-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 2px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(14, 16, 24, 0.98), rgba(6, 7, 12, 0.99));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 5px 12px 5px 5px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+      transition: transform 0.1s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    @media (hover: hover) {
+      .buzz-qr-trigger:hover .buzz-qr-trigger-inner {
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 32px rgba(139, 92, 255, 0.14);
+      }
+    }
+
+    .buzz-qr-trigger:focus-visible {
+      outline: 2px solid rgba(60, 240, 255, 0.65);
+      outline-offset: 3px;
+    }
+
+    .buzz-qr-trigger:active .buzz-qr-trigger-inner {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    .buzz-qr-trigger-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 22%;
+      object-fit: cover;
+      flex-shrink: 0;
+      display: block;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .buzz-qr-trigger-text {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      line-height: 1.35;
+      max-width: 132px;
+    }
+
+    .buzz-qr-trigger-text strong {
+      color: var(--ink);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 420px) {
+      .buzz-qr-trigger-text {
+        font-size: 0.62rem;
+        max-width: 96px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .buzz-qr-trigger-text {
+        display: none;
+      }
+
+      .buzz-qr-trigger-inner {
+        padding: 5px;
+      }
+    }
+
+    .buzz-qr-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: max(20px, env(safe-area-inset-top, 0) + 12px) 20px 20px;
+      background: rgba(5, 6, 10, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .buzz-qr-backdrop[hidden] {
+      display: none !important;
+    }
+
+    .buzz-qr-dialog {
+      position: relative;
+      max-width: 420px;
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(20, 22, 32, 0.95), rgba(8, 10, 16, 0.99));
+      box-shadow: var(--shadow);
+      padding: 24px 22px 22px;
+    }
+
+    .buzz-qr-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--ink);
+      font-size: 1.35rem;
+      line-height: 1;
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+    }
+
+    @media (hover: hover) {
+      .buzz-qr-close:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    .buzz-qr-close:focus-visible {
+      outline: 2px solid rgba(60, 240, 255, 0.65);
+      outline-offset: 2px;
+    }
+
+    .buzz-qr-dialog-head {
+      text-align: center;
+      margin-bottom: 6px;
+      padding: 0 32px 0 8px;
+    }
+
+    .buzz-qr-dialog-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 22%;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 12px 40px rgba(60, 240, 255, 0.12);
+      margin: 0 auto 12px;
+      display: block;
+    }
+
+    .buzz-qr-dialog h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .buzz-qr-dialog-lede {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0 auto;
+      max-width: 32ch;
+    }
+
+    .buzz-qr-dialog-cta {
+      margin-top: 20px;
+      justify-content: center;
     }
 
     .brand {
@@ -977,6 +1209,22 @@
           <span>Social deduction, elevated</span>
         </div>
       </div>
+      <div class="header-actions">
+        <button
+          type="button"
+          class="buzz-qr-trigger"
+          id="buzz-qr-open"
+          aria-haspopup="dialog"
+          aria-controls="buzz-qr-dialog"
+          aria-expanded="false"
+        >
+          <span class="buzz-qr-ring" aria-hidden="true"></span>
+          <span class="buzz-qr-trigger-inner">
+            <img class="buzz-qr-trigger-logo" src="buzz-qr-logo.png" width="256" height="256" alt="" decoding="async" />
+            <span class="buzz-qr-trigger-text">QR powered by <strong>Buzz QR</strong></span>
+          </span>
+        </button>
+      </div>
     </header>
 
     <main id="download">
@@ -1170,8 +1418,112 @@
     </footer>
   </div>
 
+  <div
+    class="buzz-qr-backdrop"
+    id="buzz-qr-backdrop"
+    hidden
+  >
+    <div
+      class="buzz-qr-dialog"
+      id="buzz-qr-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="buzz-qr-title"
+      tabindex="-1"
+    >
+      <button type="button" class="buzz-qr-close" id="buzz-qr-close" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="buzz-qr-dialog-head">
+        <img
+          class="buzz-qr-dialog-logo"
+          src="buzz-qr-logo.png"
+          width="256"
+          height="256"
+          alt=""
+          decoding="async"
+        />
+        <h2 id="buzz-qr-title">Buzz QR</h2>
+        <p class="buzz-qr-dialog-lede">Create and share stylized QR codes. Get the app on the store you use.</p>
+      </div>
+      <div class="cta-row buzz-qr-dialog-cta" role="group" aria-label="Download Buzz QR">
+        <a
+          class="store-badge store-badge--apple"
+          href="https://apps.apple.com/ca/app/buzz-qr-generator/id6762408289"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83"
+            width="120"
+            height="40"
+            alt="Download on the App Store"
+            decoding="async"
+          />
+        </a>
+        <a
+          class="store-badge store-badge--google"
+          href="https://play.google.com/store/apps/details?id=com.obrinus.buzzqr"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+            width="646"
+            height="250"
+            alt="Get it on Google Play"
+            decoding="async"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+
   <script>
     (function () {
+      var openBtn = document.getElementById("buzz-qr-open");
+      var backdrop = document.getElementById("buzz-qr-backdrop");
+      var closeBtn = document.getElementById("buzz-qr-close");
+      var dialog = document.getElementById("buzz-qr-dialog");
+
+      function setBuzzOpen(open) {
+        if (!backdrop || !openBtn) return;
+        backdrop.hidden = !open;
+        openBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        if (open) {
+          document.body.style.overflow = "hidden";
+          if (closeBtn) closeBtn.focus();
+        } else {
+          document.body.style.overflow = "";
+          openBtn.focus();
+        }
+      }
+
+      if (openBtn && backdrop) {
+        openBtn.addEventListener("click", function () {
+          setBuzzOpen(true);
+        });
+        if (closeBtn) {
+          closeBtn.addEventListener("click", function () {
+            setBuzzOpen(false);
+          });
+        }
+        backdrop.addEventListener("click", function (e) {
+          if (e.target === backdrop) setBuzzOpen(false);
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && backdrop && !backdrop.hidden) {
+            e.preventDefault();
+            setBuzzOpen(false);
+          }
+        });
+        if (dialog) {
+          dialog.addEventListener("click", function (e) {
+            e.stopPropagation();
+          });
+        }
+      }
+
       var y = document.getElementById("y");
       if (y) y.textContent = String(new Date().getFullYear());
 
